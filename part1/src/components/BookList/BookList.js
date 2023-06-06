@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-function BooksList({ search, onSelectBook }) {
+import { Link } from 'react-router-dom';
+import { getBooksBySearchTerm } from '../../api/booksApi';
+
+function BooksList({ search }) {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
         if (search) {
-            fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.items) {
-                    setBooks(data.items);
-                } else {
-                    setBooks([]);
-                }
-            })
-            .catch((error) => console.error(error));
+            getBooksBySearchTerm(search)
+				.then((response) => {
+					if (response.data.items) {
+						setBooks(response.data.items);
+					} else {
+						setBooks([]);
+					}
+				})
+				.catch((error) => console.error(error));
         }
     }, [search]);
 
@@ -25,9 +27,9 @@ function BooksList({ search, onSelectBook }) {
 			<ul>
 				{books.map((book, index) => (
 					<li key={index}>
-						<a title={book.volumeInfo.title} href="#" onClick={() => onSelectBook(book.id)}>
+						<Link to={`/book/${book.id}`} title={book.volumeInfo.title}>
 							{book.volumeInfo.title}
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>

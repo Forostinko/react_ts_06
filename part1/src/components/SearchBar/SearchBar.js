@@ -10,4 +10,4 @@ function SearchBar({ setSearch }) {
     )
 }
 
-export default SearchBar;
+export default SearchBar
