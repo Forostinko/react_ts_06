@@ -14,8 +14,11 @@ import ThemeToggler from '../ThemeToggler/ThemeToggler';
 
 function App() {
  	const [search, setSearch] = useState('');
+
+	//button state
 	const [theme, setTheme] = useState('light');
 
+	//theme toglle
 	const toggleTheme = () => {
 		setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
 	}
