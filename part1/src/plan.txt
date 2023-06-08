@@ -1,0 +1,3 @@
+Component Header
+Move the searchBar in to Header for to be displayed with the Header
+Fix the block to return a 404 error with a valid parametr
